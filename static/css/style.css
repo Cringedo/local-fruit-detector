@@ -4,7 +4,8 @@
   --msger-bg: #96979c;
   --border: 2px solid #96979c;
   --left-msg-bg: rgb(45, 56, 73);
-  --right-msg-bg: linear-gradient(135deg, #634570 0%, #456294 100%);
+  --right-msg-bg: darkslategray;
+  --green-mantap: rgb(65, 150, 90);
 }
 
 /* left-msg-bg/left msg is bobby's dialog boc*/
@@ -27,7 +28,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: var(--body-bg);
+  background: darkslategray;
   /* background-image: url("chat.png"); */
   font-family: Helvetica, sans-serif;
   background-repeat: no-repeat;
@@ -48,7 +49,7 @@ body {
   box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2);
 
   border-radius: 25px;
-  border: 2px solid linear-gradient(135deg, #634570 0%, #456294 100%);
+  /* border: 2px solid rgb(0, 180, 50); */
 }
 
 /* input[type="file"] {
@@ -71,18 +72,19 @@ body {
 
 input[type=file]::file-selector-button {
   margin-left: 10px;
-  background:  var(--body-bg);
+  background:  DarkSlateGray;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.23s;
   padding: 10px;
-  margin-right: 10px;
-  border-radius: 15px;
+  border-radius: 10px;
+  border: darkslategray
 }
 
+
 input[type=file]::file-selector-button:hover {
-  background: rgb(51, 42, 77);
+  background: rgb(0, 180, 50);
 }
 
 .msger-header {
@@ -90,7 +92,7 @@ input[type=file]::file-selector-button:hover {
   justify-content: space-between;
   padding: 20px;
   /* border-bottom: var(--border); */
-  background: linear-gradient(135deg, #634570 0%, #456294 100%);
+  background: darkslategray;
   color: #ffffff;
   border-radius: 24px;
 }

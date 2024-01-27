@@ -10,7 +10,7 @@ app.secret_key = "NabilHensem"
 
 # This is the global variables
 model = None
-IMAGE_FOLDER_PATH = "./images/"
+IMAGE_FOLDER_PATH = "./static/images/upload/"
 TEMPLATES = {
    "home": "main.html",
    "error": "err.html",
@@ -46,18 +46,23 @@ def predict_display(prediction):
         "probability": 0,
         "type": "null"
     }
+    all_fruits = {}
     for index, cls in enumerate(prediction[0]):
         probability = round(cls, 5)
         print(FRUIT_TYPES[index] + ": (" + classes[index] + ") - " + str(probability) + "\n")
+        all_fruits[FRUIT_TYPES[index]] = probability
         if(probability > max["probability"]):
             max["probability"] = probability
             max["type"] = FRUIT_TYPES[index]
 
     print("Fruit is " + max["type"]  + " with probability of " + str(max["probability"]))
-    return max
-
     
-
+    # ===========================
+    # max = MAX type and probability
+    # prediction[0] = all fruits types and probabilities
+    # ===========================
+    return {"max": max, "all": all_fruits}
+    
 # Upload the file and return the path of the file
 def upload_to_local(file):
    folder_path = os.path.join(IMAGE_FOLDER_PATH, file.filename)
@@ -112,11 +117,13 @@ def handle_image():
         print("Successfully Upload ✅\nFile Path: " + file_path)
 
         # TODO: POST the prediction rate and into the JS? 
-        fruit_max = predict(file_path)
-        print(fruit_max["type"])
+        prediction_details = predict(file_path)
 
     #  TODO: Update the page with this data by using render_template("index.html", PROBABILITIES = something, MAX = fruit_max)
-    return render_template(TEMPLATES["home"], FRUIT = fruit_max["type"])
+    return render_template(TEMPLATES["home"],  POST_DATA = {
+        "file": file,
+        "fruits": prediction_details
+    })
        
 
 

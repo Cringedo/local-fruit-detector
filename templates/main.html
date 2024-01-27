@@ -19,7 +19,7 @@
       
         <main class="msger-chat">
 
-            <!-- for chatbot's-->
+          <!-- for chatbot's-->
           <div class="msg left-msg">
             <div
              class="msg-img"
@@ -29,7 +29,7 @@
             <div class="msg-bubble">
               <div class="msg-info">
                 <div class="msg-info-name">BOOWA</div>
-                <div class="msg-info-time">12:45</div>
+                <div class="msg-info-time">Introduction</div>
               </div>
       
               <div class="msg-text">
@@ -38,7 +38,13 @@
             </div>
           </div>
 
-          <!-- for user's dialog -->
+          <!-- 
+            
+            Check if the data is available or not. 
+            If POST_DATA is exist, show all these dialogs
+
+          -->
+          {% if (POST_DATA) %}
           <div class="msg right-msg">
             <div
              class="msg-img"
@@ -48,18 +54,45 @@
             <div class="msg-bubble">
               <div class="msg-info">
                 <div class="msg-info-name">User</div>
-                <div class="msg-info-time">12:46</div>
+                <div class="msg-info-time">File Preview</div>
               </div>
-      
+              
               <div class="msg-text">
-                Test: {{FRUIT}}
+                <img style="height: 200px; width: 200px;" src="/static/images/upload/{{POST_DATA.file.filename}}">
               </div>
             </div>
           </div>
+
+          <div class="msg left-msg">
+            <div
+             class="msg-img"
+             style="background-image: url(images/programmer.png)"
+            ></div>
+      
+            <div class="msg-bubble">
+              <div class="msg-info">
+                <div class="msg-info-name">BOOWA</div>
+                <div class="msg-info-time">Prediction Result</div>
+              </div>
+      
+              <div class="msg-text">  
+                Hi, it looks like that is {{POST_DATA.fruits.max.type}} with the probability of {{POST_DATA.fruits.max.probability}}! 
+              </div>
+              <span style="display:inline-block; width: YOURWIDTH;"></span>
+              <div class="msg-text">
+                Here is all the probabilities: 
+                {% for key, value in POST_DATA.fruits.all.items() %}
+                <li> {{ key }} : {{ value }}</li>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% endif %}
         </main>
       
         <form class="msger-inputarea" method=post action="{{ url_for('handle_image') }}" enctype=multipart/form-data>
-          <input type="file" name=file class="msger-input" placeholder="Enter your message...">
+          <input type="file" id="files" name=file class="msger-input" placeholder="Enter your message..." hidden>
+          <label class="msger-input" for="files">You've uploaded {{ POST_DATA.file.filename}}</label>
           <button type="submit" class="msger-send-btn">Send</button>
         </form>
       </section>
