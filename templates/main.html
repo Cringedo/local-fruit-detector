@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>BOOWA</title>
+</head>
+<body >
+    <section class="msger">
+        <header class="msger-header">
+          <div class="msger-header-title" style="text-align: center;"> Fruit Recognition Bot
+            <i class="fas fa-comment-alt"></i> 
+          </div>
+          <div class="msger-header-options">
+            <span><i class="fas fa-cog"></i></span>
+          </div>
+        </header>
+      
+        <main class="msger-chat">
+
+            <!-- for chatbot's-->
+          <div class="msg left-msg">
+            <div
+             class="msg-img"
+             style="background-image: url(images/programmer.png)"
+            ></div>
+      
+            <div class="msg-bubble">
+              <div class="msg-info">
+                <div class="msg-info-name">BOOWA</div>
+                <div class="msg-info-time">12:45</div>
+              </div>
+      
+              <div class="msg-text">
+                Hi, welcome to BOOWA! your go-to bot for instantly identifying local fruits! Go ahead and let me guess your fruits. 😄
+              </div>
+            </div>
+          </div>
+
+          <!-- for user's dialog -->
+          <div class="msg right-msg">
+            <div
+             class="msg-img"
+             style="background-image: url(images/user.png)"
+            ></div>
+      
+            <div class="msg-bubble">
+              <div class="msg-info">
+                <div class="msg-info-name">User</div>
+                <div class="msg-info-time">12:46</div>
+              </div>
+      
+              <div class="msg-text">
+                Test: {{FRUIT}}
+              </div>
+            </div>
+          </div>
+        </main>
+      
+        <form class="msger-inputarea" method=post action="{{ url_for('handle_image') }}" enctype=multipart/form-data>
+          <input type="file" name=file class="msger-input" placeholder="Enter your message...">
+          <button type="submit" class="msger-send-btn">Send</button>
+        </form>
+      </section>
+</body>
+</html>
