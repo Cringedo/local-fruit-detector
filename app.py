@@ -85,7 +85,7 @@ def err_upload_failed():
     print("Error!")
 
 # Probably can more than .jpg? 
-ALLOWED_EXTENSION = {"jpg", "webpg", "jpeg"}
+ALLOWED_EXTENSION = {"jpg", "webp", "jpeg", "png"}
 
 @app.route("/", methods=['POST'])
 def handle_image():

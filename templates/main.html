@@ -76,7 +76,7 @@
               </div>
       
               <div class="msg-text">  
-                Hi, it looks like that is {{POST_DATA.fruits.max.type}} with the probability of {{POST_DATA.fruits.max.probability}}! 
+                Hi, it looks like that is <b>{{POST_DATA.fruits.max.type}}</b> with the probability of {{POST_DATA.fruits.max.probability}}! 
               </div>
               <span style="display:inline-block; width: YOURWIDTH;"></span>
               <div class="msg-text">
@@ -91,10 +91,37 @@
         </main>
       
         <form class="msger-inputarea" method=post action="{{ url_for('handle_image') }}" enctype=multipart/form-data>
-          <input type="file" id="files" name=file class="msger-input" placeholder="Enter your message..." hidden>
-          <label class="msger-input" for="files">You've uploaded {{ POST_DATA.file.filename}}</label>
-          <button type="submit" class="msger-send-btn">Send</button>
+          <input type="file" id="files" accept="image/png, image/jpg, image/jpeg, image/webp" name=file class="msger-input" placeholder="Enter your message..." hidden>
+          {% if (POST_DATA) %}
+          <label class="msger-input" id="textupdate" for="files">You've uploaded {{ POST_DATA.file.filename}}</label>
+          {% else %}
+          <label class="msger-input" id="textupdate" for="files">Click me to upload your picture of fruit!</label>
+          {% endif %}
+          <button type="submit" id="submit" class="msger-send-btn" disabled>Send</button>
+          <button type="button" id="clearbutton" class="msger-send-btn" onclick="clearFile()">Clear</button>
         </form>
       </section>
 </body>
+
+<script>
+  const filesSelector = document.getElementById("files")
+  const fileName = document.getElementById("textupdate")
+  const buttonSubmit = document.getElementById("submit")
+
+  filesSelector.addEventListener("change", (e) => {
+    fileName.textContent = e.target.files[0].name
+    buttonSubmit.disabled = false;
+  })
+
+  buttonSubmit.addEventListener("change", (e) => {
+    if(filesSelector.value == null){
+      console.log("Can't send if no file selected.");
+    }
+  })
+
+  clearFile = () => {
+    filesSelector.value = null
+    fileName.textContent = "Cleared."
+  }
+</script>
 </html>
